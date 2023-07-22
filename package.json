@@ -1,0 +1,16 @@
+{
+  "name": "middleware-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "supervisor index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
+}
