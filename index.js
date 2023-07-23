@@ -80,6 +80,24 @@ const errorLevelMiddleware = (err, req, res, next) => {
   }
 };
 
+// third party middleware : MULTER
+const multer = require("multer");
+const upload = multer({ dest: "./uploads" });
+
+app.post(
+  "/upload",
+  upload.single("image"),
+  (req, res, next) => {
+    console.log(req.file, req.body);
+    res.send(req.file);
+  },
+  (err, req, res, next) => {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+);
+
 app.use(errorLevelMiddleware);
 // listen to app
 app.listen(3000, () => {
