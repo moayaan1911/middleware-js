@@ -1,8 +1,13 @@
 // middlewares in express js
 
 const express = require("express"); // import express js
-
+const path = require("path");
 const app = express(); // create express app
+
+// built-in middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // application level middleware
 const applicationMiddleware = (req, res, next) => {
@@ -20,7 +25,7 @@ const router = express.Router();
 app.use("/api/users", router);
 
 const routerLevelMiddleware = async (req, res, next) => {
-  const authStatus = false;
+  const authStatus = true;
   if (authStatus) {
     console.log("User authStatus : ", authStatus);
     next();
@@ -38,6 +43,7 @@ const getUsers = async (req, res) => {
 };
 
 const createUsers = async (req, res) => {
+  console.log("The body sent from frontend is ", req.body);
   res.status(201).json({
     message: "Create new user",
   });
